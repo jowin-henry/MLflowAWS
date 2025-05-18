@@ -1,45 +1,133 @@
-### MLFLOW On AWS
 
-## MLflow on AWS Setup:
 
-1. Login to AWS console.
-2. Create IAM user with AdministratorAccess
-3. Export the credentials in your AWS CLI by running "aws configure"
-4. Create a s3 bucket
-5. Create EC2 machine (Ubuntu) & add Security groups 5000 port
+# 🚀 MLflow on AWS Setup 
 
-Run the following command on EC2 machine
+This guide helps you quickly deploy an MLflow tracking server on AWS using an EC2 instance and S3 for artifact storage.
+
+---
+
+## 🧰 Prerequisites
+
+* An active AWS account
+
+
+---
+
+## 🔐 1. Create IAM User with Admin Access
+
+1. Go to **IAM Console** → **Users**
+2. Create a new user with **Programmatic Access**
+3. Attach **AdministratorAccess** policy
+4. Save the **Access Key ID** and **Secret Access Key**
+
+
+---
+
+## 💻 2. Configure AWS CLI Locally
+
 ```bash
+aws configure
+```
+
+Enter your saved access key and region (e.g. `eu-north-1`).
+
+---
+
+## ☁️ 3. Create S3 Bucket
+
+1. Open the **S3 Console**
+2. Create a new bucket (e.g. `mlflowtrack1`)
+3. Uncheck **Block all public access** if you want to make artifacts public (optional)
+
+📸 *\[Insert screenshot of S3 bucket creation]*
+
+---
+
+## 🖥️ 4. Launch EC2 Instance (Ubuntu)
+
+1. Choose **Ubuntu 22.04 LTS**
+2. Select instance type (e.g. `t2.micro` for testing)
+3. Create a security group with **port 5000** open (for MLflow UI)
+4. Launch and connect via SSH
+
+📸 *\[Insert screenshot of EC2 setup + open port 5000]*
+
+---
+
+## ⚙️ 5. Setup MLflow on EC2
+
+```bash
+# Update packages
 sudo apt update
 
-sudo apt install python3-pip
+# Install Python tools
+sudo apt install python3-pip virtualenv -y
 
-sudo apt install pipenv
+# Install pipenv
+sudo pip3 install pipenv
 
-sudo apt install virtualenv
+# Create project directory
+mkdir mlflow && cd mlflow
 
-mkdir mlflow
+# Setup environment
+pipenv install mlflow awscli boto3
 
-cd mlflow
-
-pipenv install mlflow
-
-pipenv install awscli
-
-pipenv install boto3
-
+# Activate shell
 pipenv shell
+```
 
+---
 
-## Then set aws credentials
+## 🔐 6. Configure AWS CLI in EC2
+
+Inside the `pipenv` shell:
+
+```bash
 aws configure
+```
+
+Enter the same credentials again for your EC2 environment.
+
+---
+
+## 🚀 7. Run the MLflow Tracking Server
+
+```bash
+mlflow server \
+  --host 0.0.0.0 \
+  --port 5000 \
+  --default-artifact-root s3://mlflowtrack1
+```
+
+MLflow UI will now be available at:
+
+```bash
+http://<EC2-Public-DNS>:5000
+```
+
+📸 *\[Insert screenshot of MLflow UI]*
+
+---
+
+## 🔗 8. Connect Your Local MLflow Client
+
+On your local machine or in your Python code:
+
+```bash
+export MLFLOW_TRACKING_URI=http://<EC2-Public-DNS>:5000
+```
+
+Now all your experiments will log remotely to your MLflow server on AWS.
+
+---
+
+## ✅ Done!
+
+Successfully deployed an **MLflow tracking server** on AWS with:
+
+* S3 for artifact storage
+* EC2 for hosting
+
+---
 
 
-#Finally 
-mlflow server -h 0.0.0.0 --default-artifact-root s3://mlflowtrack1
-
-#open Public IPv4 DNS to the port 5000
-
-
-#set uri in your local terminal and in your code 
-export MLFLOW_TRACKING_URI=http://ec2-54-158-152-207.compute-1.amazonaws.com:5000/
