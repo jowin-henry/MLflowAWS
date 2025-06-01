@@ -2,7 +2,7 @@
 
 # 🚀 MLflow on AWS Setup 
 
-This guide helps you quickly deploy an MLflow tracking server on AWS using an EC2 instance and S3 for artifact storage.
+**Goal** : To deploy an MLflow tracking server on AWS using an EC2 instance and S3 for artifact storage.
 
 ---
 
