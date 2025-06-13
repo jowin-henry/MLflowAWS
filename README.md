@@ -49,7 +49,8 @@ Enter your saved access key and region (e.g. `eu-north-1`).
 3. Create a security group with **port 5000** open (for MLflow UI)
 4. Launch and connect via SSH
 
-📸 
+📸 ![EC2 Instance Running](images/MLflowAWS1.png)
+![EC2 Instance Summary](images/MLflowAWS2.png)
 
 ---
 
@@ -74,7 +75,7 @@ pipenv install mlflow awscli boto3
 # Activate shell
 pipenv shell
 ```
-
+![](images/MLflowAWS.png)
 ---
 
 ## 🔐 6. Configure AWS CLI in EC2
@@ -104,7 +105,7 @@ MLflow UI will now be available at:
 http://<EC2-Public-DNS>:5000
 ```
 
-📸 *\[Insert screenshot of MLflow UI]*
+
 
 ---
 
@@ -117,6 +118,8 @@ export MLFLOW_TRACKING_URI=http://<EC2-Public-DNS>:5000
 ```
 
 Now all your experiments will log remotely to your MLflow server on AWS.
+
+![MLflow Dashboard](images/MLflowAWS3.png)
 
 ---
 
