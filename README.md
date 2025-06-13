@@ -36,10 +36,9 @@ Enter your saved access key and region (e.g. `eu-north-1`).
 ## ☁️ 3. Create S3 Bucket
 
 1. Open the **S3 Console**
-2. Create a new bucket (e.g. `mlflowtrack1`)
+2. Create a new bucket (e.g. `mlflowtrack`)
 3. Uncheck **Block all public access** if you want to make artifacts public (optional)
 
-📸 *\[Insert screenshot of S3 bucket creation]*
 
 ---
 
@@ -50,7 +49,7 @@ Enter your saved access key and region (e.g. `eu-north-1`).
 3. Create a security group with **port 5000** open (for MLflow UI)
 4. Launch and connect via SSH
 
-📸 *\[Insert screenshot of EC2 setup + open port 5000]*
+📸 
 
 ---
 
