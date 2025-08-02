@@ -122,6 +122,21 @@ Now all your experiments will log remotely to your MLflow server on AWS.
 ![MLflow Dashboard](images/MLflowAWS3.png)
 
 ---
+---
+
+## 🔄 9. CI/CD and Containerization 
+
+For automating deployment, testing, and containerizing using **GitHub Actions** and **Docker**, check out this repo:
+
+👉 [CI/CD with GitHub Actions & Docker](https://github.com/jowin-henry/dockerimagehub)
+
+This repo contains:
+
+- Dockerfile containerization
+- GitHub Actions workflows to build, test, and deploy your container to AWS  
+- Best practices for continuous integration and continuous deployment  
+
+---
 
 ## ✅ Done!
 
